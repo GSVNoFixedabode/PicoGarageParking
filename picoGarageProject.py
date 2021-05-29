@@ -20,10 +20,10 @@ full_width = 2860 # garage internal width
 car_width = 1765 # Mazda
 car_bar = led_count * (car_width / full_width) # leds 
 perfect = 0.5 * (full_width - car_width)
-l_red = perfect * 0.6 #mm to wall
-r_red = perfect * 1.4
-l_orange = perfect * 0.8
-r_orange = perfect * 1.2
+l_red = perfect * 0.7 #mm to wall
+r_red = perfect * 1.3
+l_orange = perfect * 0.9
+r_orange = perfect * 1.1
 gap = (led_count - car_bar) * 0.5
 
 @rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW, out_shiftdir=rp2.PIO.SHIFT_LEFT,
