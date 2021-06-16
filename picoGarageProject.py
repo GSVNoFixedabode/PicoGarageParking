@@ -20,10 +20,10 @@ full_width = 2860 # garage internal width
 car_width = 1765 # Mazda
 car_bar = led_count * (car_width / full_width) # leds 
 perfect = 0.5 * (full_width - car_width)
-l_red = perfect * 0.7 #mm to wall
+l_red = perfect * 0.7#mm to wall
 r_red = perfect * 1.3
-l_orange = perfect * 0.9
-r_orange = perfect * 1.1
+l_orange = perfect * 0.8
+r_orange = perfect * 1.2
 gap = (led_count - car_bar) * 0.5
 
 @rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW, out_shiftdir=rp2.PIO.SHIFT_LEFT,
@@ -135,9 +135,8 @@ led = machine.Pin(15, machine.Pin.OUT)
 sensor_pir = machine.Pin(16, machine.Pin.IN)
 
 # Ultrasonic
-pulse = machine.Pin(18, machine.Pin.OUT)
-receiver = machine.Pin(26, machine.Pin.IN, machine.Pin.PULL_DOWN)
-ultrasonic = HCSR04(trigger_pin=18, echo_pin=26, echo_timeout_us=1000000)
+#receiver = machine.Pin(26, machine.Pin.IN, machine.Pin.PULL_DOWN)
+ultrasonic = HCSR04(trigger_pin=26, echo_pin=18, echo_timeout_us=1000000)
 # set up interrupt for PIR trigger
 sensor_pir.irq(trigger=machine.Pin.IRQ_RISING, handler=pir_handler)
 
