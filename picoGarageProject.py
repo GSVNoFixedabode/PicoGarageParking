@@ -150,6 +150,6 @@ state_mach.active(1)
 pixel_array = array.array("I", [0 for _ in range(led_count)])
 # Main loop for twiddling metaphorical thumbs
 while True:
-#    led.toggle()
+	led.toggle()
 	print("Sleeping")
-	utime.sleep(15)
+	utime.sleep(10)
