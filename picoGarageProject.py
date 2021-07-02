@@ -14,16 +14,17 @@ import rp2
 led_count = 120 # number of LEDs in lightstrip
 brightness = 0.2 # 0.1 = darker, 1.0 = brightest
 PIN_NUM = 13 # pin connected to lightstrip
+adjustment = 52 #adjustment in mm for depth of wall-mounted unit
 
 # garage dmensions
 full_width = 2860 # garage internal width
 car_width = 1765 # Mazda
 car_bar = led_count * (car_width / full_width) # leds 
 perfect = 0.5 * (full_width - car_width)
-l_red = perfect * 0.7#mm to wall
-r_red = perfect * 1.3
-l_orange = perfect * 0.8
-r_orange = perfect * 1.2
+l_red = perfect * 0.8 #mm to wall
+r_red = perfect * 1.2
+l_orange = perfect * 0.92
+r_orange = perfect * 1.08
 gap = (led_count - car_bar) * 0.5
 
 @rp2.asm_pio(sideset_init=rp2.PIO.OUT_LOW, out_shiftdir=rp2.PIO.SHIFT_LEFT,
@@ -70,7 +71,7 @@ def hex_to_rgb(hex_val):
 def pir_handler(pin):
 	print("ALARM! motion.") #testing
     #blinky
-	for i in range(50):
+	for i in range(10):
 		led.toggle()
 		utime.sleep_ms(100)
         
@@ -78,6 +79,7 @@ def pir_handler(pin):
 	while time.time() < t_end:
 		close = ultrasonic.distance_mm()
 		if close > 0 and close < 2000:
+            close = close + adjustment
 			print("Distance:", close, "mm")
 			paint_leds(close)
 # Fade to middle of string
@@ -92,14 +94,14 @@ def paint_leds(measured):
 		if measured <= l_red:
 			car_bar_colour = '#ff0000'
 		elif measured <= l_orange:
-			car_bar_colour = '#ff8c00'
+			car_bar_colour = '#ffa510'
 		else:
 			car_bar_colour = '#00ff00'
 	else: #right of centre
 		if measured >= r_red: 
 			car_bar_colour = '#ff0000'
 		elif measured >= r_orange:
-			car_bar_colour = '#ff8c00'
+			car_bar_colour = '#ffa510'
 		else:
 			car_bar_colour = '#00ff00'
 # clear the strip
@@ -132,7 +134,7 @@ def no_car():
 # blinky LED for testing
 led = machine.Pin(15, machine.Pin.OUT)
 # PIR
-sensor_pir = machine.Pin(16, machine.Pin.IN)
+sensor_pir = machine.Pin(16, machine.Pin.IN, machine.Pin.PULL_DOWN)
 
 # Ultrasonic
 #receiver = machine.Pin(26, machine.Pin.IN, machine.Pin.PULL_DOWN)
