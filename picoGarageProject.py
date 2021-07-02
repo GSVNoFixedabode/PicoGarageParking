@@ -79,7 +79,7 @@ def pir_handler(pin):
 	while time.time() < t_end:
 		close = ultrasonic.distance_mm()
 		if close > 0 and close < 2000:
-            close = close + adjustment
+			close = close + adjustment
 			print("Distance:", close, "mm")
 			paint_leds(close)
 # Fade to middle of string
