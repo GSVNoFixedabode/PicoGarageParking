@@ -9,3 +9,4 @@ Added firtzing image of circuit diagram as image file.
 
 ![image](https://user-images.githubusercontent.com/13099660/120067865-e6ee3200-c0d1-11eb-9a6f-6668ac88566a.png)
 
+![image](https://user-images.githubusercontent.com/13099660/139599128-4bf87448-40de-4955-a4d8-b53429976de7.png)
